@@ -1,13 +1,12 @@
-    1  history -w
-    2  KDIR=$HOME/repos/linux-stable
-    3  cd ~/repos/test2
-    4  export PATH=/opt/gcc-arm-8.3-2019.03-x86_64-arm-eabi/bin:$PATH
-    5  make clean
-    6  make ARCH=arm CROSS_COMPILE=arm-eabi- -C ~/repos/linux-stable M=$PWD modules
-    7  mkdir -p ~/repos/busybox/install/lib/modules
-    8  cp $HOME/repos/test2/hello.ko ~/repos/busybox/install/lib/modules/
-    9  cd ~/repos/busybox/install
-   10  find . -print0 | cpio --null -ov --format=newc | gzip > ../rootfs.cpio.gz
-   11  cd ..
-   12  qemu-system-arm -kernel install/boot/zImage -initrd rootfs.cpio.gz -machine virt -nographic -m 512 --append "root=/dev/ram0 rw console=ttyAMA0,115200 mem=512M"
-   13  cd ~ && date && history > history.txt 
+    1  KDIR=$HOME/repos/linux-stable
+    2  cd ~/repos/test2
+    3  export PATH=/opt/gcc-arm-8.3-2019.03-x86_64-arm-eabi/bin:$PATH
+    4  make clean
+    5  make ARCH=arm CROSS_COMPILE=arm-eabi- -C ~/repos/linux-stable M=$PWD modules
+    6  mkdir -p ~/repos/busybox/install/lib/modules
+    7  cp $HOME/repos/test2/hello.ko ~/repos/busybox/install/lib/modules/
+    8  cd ~/repos/busybox/install
+    9  find . -print0 | cpio --null -ov --format=newc | gzip > ../rootfs.cpio.gz
+   10  cd ..
+   11  qemu-system-arm -kernel install/boot/zImage -initrd rootfs.cpio.gz -machine virt -nographic -m 512 --append "root=/dev/ram0 rw console=ttyAMA0,115200 mem=512M"
+   12  cd ~/repos/test2 && date && history > history.txt
